@@ -1,125 +1,74 @@
-# Machine Learning Beginner Project: Linear Regression
-### Project Title: Predicting House Prices Using Linear Regression
+# Boston Housing Price Prediction Using Linear Regression
 
-**Objective:** To introduce students to supervised learning, focusing on linear regression, by guiding them through a project that predicts house prices based on a variety of features.
+## Overview
+This project focuses on predicting housing prices in the Boston area using a machine learning regression model. The dataset used is the **Boston Housing Dataset**, which contains various features related to housing characteristics, such as crime rate (`CRIM`), average number of rooms per dwelling (`RM`), property tax rate (`TAX`), and more. The target variable is the median value of owner-occupied homes (`MEDV`), measured in thousands of dollars.
 
-**Dataset:** We'll use the "Boston Housing Dataset" from the UCI Machine Learning Repository. This dataset contains information about housing in Boston, including features such as the number of rooms, age of the house, and crime rate, along with the target variable, which is the median value of owner-occupied homes.
+The goal of this assessment is to build a predictive model for `MEDV` and evaluate its performance using metrics like **Mean Squared Error (MSE)**. Additionally, the project explores the impact of **feature engineering** on model performance, demonstrating how creating new features or transforming existing ones can improve the model's ability to capture underlying patterns in the data.
 
-### Project Structure:
+---
 
-- Data Exploration and Preprocessing
-- Model Building and Training
-- Model Evaluation
-- Feature Engineering and Improvement
-- Collaboration and Version Control
-  
+## Dataset Description
+The dataset consists of 14 columns:
+1. **CRIM**: Per capita crime rate by town.
+2. **ZN**: Proportion of residential land zoned for lots over 25,000 sq.ft.
+3. **INDUS**: Proportion of non-retail business acres per town.
+4. **CHAS**: Charles River dummy variable (1 if tract bounds river; 0 otherwise).
+5. **NOX**: Nitric oxide concentration (parts per 10 million).
+6. **RM**: Average number of rooms per dwelling.
+7. **AGE**: Proportion of owner-occupied units built prior to 1940.
+8. **DIS**: Weighted distances to five Boston employment centers.
+9. **RAD**: Index of accessibility to radial highways.
+10. **TAX**: Full-value property tax rate per $10,000.
+11. **PTRATIO**: Pupil-teacher ratio by town.
+12. **B**: Proportion of people of African American descent by town.
+13. **LSTAT**: Percentage of lower status of the population.
+14. **MEDV**: Median value of owner-occupied homes in $1000s (target variable).
 
-├── data
+---
 
-│   └── boston_housing.csv
+## Approach
 
-├── notebooks
+### 1. Baseline Model
+The baseline model was trained using only the original features from the dataset. A **Linear Regression** model was employed to predict `MEDV`. The performance of this model was evaluated using **Mean Squared Error (MSE)**, which quantifies the average squared difference between predicted and actual values.
 
-│   ├── EDA.ipynb
+- **Baseline Model MSE**: 24.999
 
+### 2. Feature Engineering
+To improve the model's performance, several feature engineering techniques were applied:
+- **Interaction Terms**: Created new features by combining existing ones (e.g., `RM_ZN`, `CRIM_TAX`) to capture relationships between variables.
+- **Polynomial Features**: Added squared or cubed terms for certain features (e.g., `RM_squared`, `LSTAT_cubed`) to account for non-linear relationships.
+- **Derived Metrics**: Introduced domain-specific features, such as the median house price grouped by whether the property is near the Charles River (`MEDV_median_by_CHAS`).
+- **Logarithmic Transformations**: Applied logarithmic transformations to skewed features (e.g., `log_CRIM`, `log_DIS`) to stabilize variance and reduce skewness.
 
-│   ├── Data_Preprocessing.ipynb
+These engineered features allowed the model to better capture complex patterns in the data.
 
-│   ├── Model_Training.ipynb
+### 3. New Model Performance
+After incorporating the engineered features, the model's performance improved significantly:
+- **New Model MSE**: 12.398
 
-│   └── Model_Evaluation.ipynb
+This represents a **50.4% reduction in MSE**, highlighting the effectiveness of feature engineering in enhancing the model's predictive power.
 
-├── scripts
+---
 
-│   ├── data_preprocessing.py
+## Key Takeaways
+1. **Feature Engineering Matters**: Thoughtfully designed features can significantly improve a model's ability to generalize and make accurate predictions.
+2. **Non-Linearity**: Adding polynomial and interaction terms helps capture non-linear relationships that linear models cannot detect with raw features alone.
+3. **Domain Knowledge**: Incorporating domain-specific insights (e.g., grouping by categorical variables) can lead to more meaningful features.
 
-│   ├── train_model.py
+---
 
-│   └── evaluate_model.py
+## Future Work
+While the current results are promising, there are opportunities for further improvement:
+- Experiment with advanced models like **Random Forest**, **Gradient Boosting**, or **Neural Networks**.
+- Perform hyperparameter tuning to optimize model performance.
+- Conduct additional feature selection to identify the most impactful features.
 
-├── README.md
+---
 
-├── requirements.txt
+## Author Information
+This project was completed by:
 
-└── .gitignore
+**Name**: Sajak Basnet  
+**LinkedIn Profile**: https://www.linkedin.com/in/sajak-basnet-7b2792353/
 
-## 2. Data Exploration and Preprocessing
-#### **Task 1:** Data Exploration
-
-Notebook: notebooks/EDA.ipynb
-Steps:
-- Load the dataset.
-- Explore the data structure, types, and summary statistics.
-- Visualize relationships between features and the target variable.
-- Identify missing values and outliers.
-
-
-#### Task 2: Data Preprocessing
-
-Notebook: notebooks/Data_Preprocessing.ipynb
-Steps:
-- Handle missing values and outliers.
-- Encode categorical variables.
-- Normalize/standardize numerical features.
-- Split the data into training and testing sets.
-- Script: scripts/data_preprocessing.py
-
-
-### 3. Model Building and Training
-#### Task 3: Model Training
-
-Notebook: notebooks/Model_Training.ipynb
-Steps:
-- Choose appropriate features for the model.
-- Train a linear regression model.
-- Perform hyperparameter tuning (if applicable).
-
-- Script: scripts/train_model.py
-
-### 4. Model Evaluation
-#### Task 4: Model Evaluation
-
-Notebook: notebooks/Model_Evaluation.ipynb
-Steps:
-- Evaluate the model using metrics such as Mean Squared Error (MSE), R-squared.
-- Plot residuals to check the assumptions of linear regression.
-- Compare model performance with different feature sets or preprocessing steps.
-- Script: scripts/evaluate_model.py
-### 5. Feature Engineering and Improvement
-#### Task 5: Feature Engineering
-
-Notebook: notebooks/Feature_Engineering.ipynb
-Steps:
-- Create new features that might improve model performance.
-- Test different feature combinations.
-- Evaluate the impact of new features on model performance.
-
-### 6. Collaboration and Version Control
-#### Task 6: Collaboration and Version Control
-
-Steps:
-# Ensure each student works on their branch.
-- Regularly merge branches after reviewing and resolving conflicts.
-- Use pull requests to review and discuss changes before merging.
-- Git Commands: Provide a list of essential Git commands for students to use.
-
-
-## Dataset Details
-Source: Boston Housing Dataset on UCI Machine Learning Repository
-
-Features:
-
-- CRIM: per capita crime rate by town.
-- ZN: proportion of residential land zoned for lots over 25,000 sq. ft.
-- INDUS: proportion of non-retail business acres per town.
-- CHAS: Charles River dummy variable (1 if tract bounds river; 0 otherwise).
-- NOX: nitrogen oxides concentration (parts per 10 million).
-- RM: average number of rooms per dwelling.
-- AGE: proportion of owner-occupied units built prior to 1940.
-- DIS: weighted distances to five Boston employment centers.
-- RAD: index of accessibility to radial highways.
-- TAX: full-value property tax rate per $10,000.
-- PTRATIO: pupil-teacher ratio by town.
-- B: 1000(Bk - 0.63)^2 where Bk is the proportion of black residents by town.
-- LSTAT: percentage of lower status of the population.
-- MEDV: median value of owner-occupied homes in $1000s (Target).
+---
